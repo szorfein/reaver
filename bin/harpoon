@@ -1,4 +1,15 @@
 #!/usr/bin/env ruby
+
 require 'harpoon'
+
+files = [
+  { name: 'wallpaper.zip',
+    url: 'https://github.com/szorfein/walls/archive/main.zip',
+  }
+]
+
+#puts Harpoon.banner
+
+files.each { |file| Harpoon.download(file[:url], file[:name]) }
 
 puts 'Harpoon v.' + Harpoon::VERSION
