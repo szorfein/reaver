@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'harpoon'
+
+puts 'Harpoon v.' + Harpoon::VERSION
