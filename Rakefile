@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake/testtask'
-require File.dirname(__FILE__) + '/lib/harpoon/version'
+require File.dirname(__FILE__) + '/lib/reaver/version'
 
 # run rake
 Rake::TestTask.new(:test) do |t|
@@ -14,9 +14,9 @@ end
 namespace :gem do
   desc 'build the gem'
   task :build do
-  Dir['harpoon*.gem'].each { |f| File.unlink(f) }
-    system('gem build harpoon.gemspec')
-    system("gem install harpoon-#{Harpoon::VERSION}.gem")
+  Dir['reaver*.gem'].each { |f| File.unlink(f) }
+    system('gem build reaver.gemspec')
+    system("gem install reaver-#{Reaver::VERSION}.gem")
   end
 end
 
