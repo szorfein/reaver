@@ -30,12 +30,13 @@ module Harpoon
       if @tasks['time'].is_a?(Integer)
         puts "good number #{@tasks['time']}"
       end
+
+      update_time
     end
 
     def save_yaml
       return if @tasks == nil
 
-      update_time
       File.open(@file, 'w') { |f| YAML.dump(@tasks, f) }
     end
 
