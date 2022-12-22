@@ -38,7 +38,6 @@ Gem::Specification.new do |s|
   s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
   s.required_ruby_version = '>=2.6'
-  s.requirements << 'TODO change: libmagick, v6.0'
-  s.requirements << 'TODO change: A good graphics card'
-  s.add_dependency 'thor', '~> 1.0'
+  s.add_dependency 'whirly'
+  s.add_dependency 'paint'
 end
