@@ -8,7 +8,7 @@ require 'fileutils'
 
 module Reaver
   def self.download(url, name)
-    dest = "#{CACHE_DIR}/#{name}"
+    dest = name
     url = URI(url)
     raise Error, "url was invalid" if !url.respond_to?(:open)
 
