@@ -3,7 +3,7 @@
 require 'yaml'
 require 'time'
 
-module Harpoon
+module Reaver
   class Collection
     attr_reader :tasks
 
@@ -23,7 +23,7 @@ module Harpoon
       return unless @tasks
 
       if @tasks['things'].length >= 1
-        @tasks['things'].each { |t| Harpoon.download(t['url'], t['name']) }
+        @tasks['things'].each { |t| Reaver.download(t['url'], t['name']) }
       end
 
       update_time

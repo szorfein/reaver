@@ -6,7 +6,7 @@ require 'whirly'
 require 'tempfile'
 require 'fileutils'
 
-module Harpoon
+module Reaver
   def self.download(url, name)
     dest = "#{CACHE_DIR}/#{name}"
     url = URI(url)

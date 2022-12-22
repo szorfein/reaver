@@ -1,20 +1,20 @@
-# harpoon
+# reaver
 
-A tools to downloads things on the net. Harpoon is used to get all files
+A tools to downloads things on the net. Reaver is used to get all files
 required by your project, track the last version, etc.
 
 ## Collections
 
-Harpoon search collections by order in:
+Reaver search collections by order in:
 
-- `$XDG_CONFIG_HOME/harpoon`
-- `$HOME/.config/harpoon`
+- `$XDG_CONFIG_HOME/reaver`
+- `$HOME/.config/reaver`
 
 ## Create many collection of things
 
 For example, your need to use Vim, vim require a lots of external plugins to be more efficient, so create a collection called `vim.yml`.
 
-    $ $EDITOR ~/.config/harpoon/vim.yml
+    $ $EDITOR ~/.config/reaver/vim.yml
 
 In the file, we add all archives required by u projects
 
@@ -35,6 +35,6 @@ time: 86000
 `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).  
 The `name` must contain the path extension for now.
 
-And start harpoon simply with:
+And start reaver simply with:
 
-    $ harpoon
+    $ reaver
