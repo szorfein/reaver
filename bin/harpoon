@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require 'harpoon'
+
+puts Harpoon.banner
 
 puts 'Harpoon v.' + Harpoon::VERSION
