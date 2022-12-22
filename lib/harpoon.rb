@@ -15,22 +15,28 @@ module Harpoon
     color: true,
     ambiguous_characters_width: 1
 
-  FileUtils.mkdir_p(CACHE_DIR)
+  def self.main
+    FileUtils.mkdir_p(CACHE_DIR)
 
-  Dir.glob("#{CACHE_DIR}/*.yml").each do |f|
-    if File.exist? f
-      collection = Collection.new(f)
-      collection.load_yaml
+    Dir.glob("#{CACHE_DIR}/*.yml").each do |f|
+      if File.exist? f
+        collection = Collection.new(f)
+        collection.load_yaml
 
-      if collection.tasks
-        puts "Next download >> #{collection.tasks['next']}"
-        if collection.tasks['next'] < Time.new
-          puts ' >> Download time for ' + f.split('/').last
-          collection.launch
+        if collection.tasks
+          next_download = collection.tasks['next'] ||= Time.new
+          name = f.split('/').last
+
+          if next_download < Time.new
+            puts ' >> Download time for ' + name
+            collection.launch
+          else
+            puts "Next download for #{name} >> #{next_download}"
+          end
         end
-      end
 
-      collection.save_yaml
+        collection.save_yaml
+      end
     end
   end
 end

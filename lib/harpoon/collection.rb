@@ -14,7 +14,7 @@ module Harpoon
     def load_yaml
       puts "loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-      puts @tasks.inspect
+      # puts @tasks.inspect
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
@@ -23,12 +23,7 @@ module Harpoon
       return unless @tasks
 
       if @tasks['things'].length >= 1
-        puts "many things to do."
-        @tasks['things'].each { |t| puts "x #{t['name']}, u #{t['url']}" }
-      end
-
-      if @tasks['time'].is_a?(Integer)
-        puts "good number #{@tasks['time']}"
+        @tasks['things'].each { |t| Harpoon.download(t['url'], t['name']) }
       end
 
       update_time
