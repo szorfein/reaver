@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-require_relative 'harpoon/version'
-require_relative 'harpoon/banner'
-require_relative 'harpoon/download'
-require_relative 'harpoon/collection'
+require_relative 'reaver/version'
+require_relative 'reaver/banner'
+require_relative 'reaver/download'
+require_relative 'reaver/collection'
 
 require 'whirly'
 require 'fileutils'
 
-module Harpoon
+module Reaver
   # Where downloads things
-  CACHE_DIR = "#{ENV['HOME']}/.cache/harpoon"
+  CACHE_DIR = "#{ENV['HOME']}/.cache/reaver"
 
   # Search collection paths
   if ENV['XDG_CONFIG_HOME']
-    WORKDIR = "#{ENV['XDG_CONFIG_HOME']}/harpoon"
+    WORKDIR = "#{ENV['XDG_CONFIG_HOME']}/reaver"
   else
-    WORKDIR = "#{ENV['HOME']}/.config/harpoon"
+    WORKDIR = "#{ENV['HOME']}/.config/reaver"
   end
 
   # Configure Whirly

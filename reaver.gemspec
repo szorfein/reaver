@@ -1,28 +1,28 @@
 # frozen_string_literal: true
 
-require_relative 'lib/harpoon/version'
+require_relative 'lib/reaver/version'
 
 # https://guides.rubygems.org/specification-reference/
 Gem::Specification.new do |s|
-  s.name = 'harpoon'
+  s.name = 'reaver'
   s.summary = 'A tool to downloads and search for updates of things on the Net.'
-  s.version = Harpoon::VERSION
+  s.version = Reaver::VERSION
   s.platform = Gem::Platform::RUBY
 
   s.description = <<-DESCRIPTION
-    A tool to download and search for updates of things on the Net. Define collections in yaml with a delay in seconds and launch Harpoon.
+    A tool to download and search for updates of things on the Net. Define collections in yaml with a delay in seconds and launch Reaver.
   DESCRIPTION
 
   s.email = 'szorfein@protonmail.com'
-  s.homepage = 'https://github.com/szorfein/harpoon'
+  s.homepage = 'https://github.com/szorfein/reaver'
   s.license = 'MIT'
   s.author = 'szorfein'
 
   s.metadata = {
-    'bug_tracker_uri' => 'https://github.com/szorfein/harpoon/issues',
-    'changelog_uri' => 'https://github.com/szorfein/harpoon/blob/main/CHANGELOG.md',
-    'source_code_uri' => 'https://github.com/szorfein/harpoon',
-    'wiki_uri' => 'https://github.com/szorfein/harpoon/wiki',
+    'bug_tracker_uri' => 'https://github.com/szorfein/reaver/issues',
+    'changelog_uri' => 'https://github.com/szorfein/reaver/blob/main/CHANGELOG.md',
+    'source_code_uri' => 'https://github.com/szorfein/reaver',
+    'wiki_uri' => 'https://github.com/szorfein/reaver/wiki',
     'funding_uri' => 'https://patreon.com/szorfein',
   }
 
@@ -31,10 +31,10 @@ Gem::Specification.new do |s|
   end
 
   s.files += %w[CHANGELOG.md LICENSE README.md]
-  s.files += %w[harpoon.gemspec]
+  s.files += %w[reaver.gemspec]
 
   s.bindir = 'bin'
-  s.executables << 'harpoon'
+  s.executables << 'reaver'
   s.extra_rdoc_files = %w[README.md]
 
   s.cert_chain = %w[certs/szorfein.pem]
