@@ -38,6 +38,6 @@ Gem::Specification.new do |s|
   s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
   s.required_ruby_version = '>=2.6'
-  s.add_dependency 'whirly'
-  s.add_dependency 'paint'
+  s.add_dependency 'whirly', '~> 0.3'
+  s.add_dependency 'paint', '~> 2.3'
 end
