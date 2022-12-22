@@ -10,7 +10,7 @@ Harpoon search collections by order in:
 - `$XDG_CONFIG_HOME/harpoon`
 - `$HOME/.config/harpoon`
 
-## Create a collection of things
+## Create many collection of things
 
 For example, your need to use Vim, vim require a lots of external plugins to be more efficient, so create a collection called `vim.yml`.
 
@@ -33,6 +33,8 @@ time: 86000
 ```
 
 `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).  
-And start harpoon simply
+The `name` must contain the path extension for now.
+
+And start harpoon simply with:
 
     $ harpoon

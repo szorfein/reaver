@@ -9,16 +9,28 @@ require 'whirly'
 require 'fileutils'
 
 module Harpoon
+  # Where downloads things
   CACHE_DIR = "#{ENV['HOME']}/.cache/harpoon"
 
+  # Search collection paths
+  if ENV['XDG_CONFIG_HOME']
+    WORKDIR = "#{ENV['XDG_CONFIG_HOME']}/harpoon"
+  else
+    WORKDIR = "#{ENV['HOME']}/.config/harpoon"
+  end
+
+  # Configure Whirly
   Whirly.configure spinner: 'bouncingBar',
     color: true,
     ambiguous_characters_width: 1
 
   def self.main
     FileUtils.mkdir_p(CACHE_DIR)
+    FileUtils.mkdir_p(WORKDIR)
 
-    Dir.glob("#{CACHE_DIR}/*.yml").each do |f|
+    puts ">> Search collections in #{WORKDIR}"
+
+    Dir.glob("#{WORKDIR}/*.yml").each do |f|
       if File.exist? f
         collection = Collection.new(f)
         collection.load_yaml

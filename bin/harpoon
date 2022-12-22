@@ -7,4 +7,4 @@ puts Harpoon.banner
 
 Harpoon.main
 
-puts 'Harpoon v' + Harpoon::VERSION
+puts "\nHarpoon v" + Harpoon::VERSION
