@@ -5,12 +5,12 @@ require_relative 'lib/harpoon/version'
 # https://guides.rubygems.org/specification-reference/
 Gem::Specification.new do |s|
   s.name = 'harpoon'
-  s.summary = 'Awesome Ruby Project !'
+  s.summary = 'A tool to downloads and search for updates of things on the Net.'
   s.version = Harpoon::VERSION
   s.platform = Gem::Platform::RUBY
 
   s.description = <<-DESCRIPTION
-    harpoon is just an awesome gem !
+    A tool to download and search for updates of things on the Net. Define collections in yaml with a delay in seconds and launch Harpoon.
   DESCRIPTION
 
   s.email = 'szorfein@protonmail.com'
@@ -26,7 +26,10 @@ Gem::Specification.new do |s|
     'funding_uri' => 'https://patreon.com/szorfein',
   }
 
-  s.files = Dir.glob('{lib,bin}/**/*', File::FNM_DOTMATCH).reject { |f| File.directory?(f) }
+  s.files = Dir.glob('{lib,bin}/**/*', File::FNM_DOTMATCH).reject do |f|
+    File.directory?(f)
+  end
+
   s.files += %w[CHANGELOG.md LICENSE README.md]
   s.files += %w[harpoon.gemspec]
 
@@ -38,7 +41,6 @@ Gem::Specification.new do |s|
   s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
   s.required_ruby_version = '>=2.6'
-  s.requirements << 'TODO change: libmagick, v6.0'
-  s.requirements << 'TODO change: A good graphics card'
-  s.add_dependency 'thor', '~> 1.0'
+  s.add_dependency 'whirly', '~> 0.3'
+  s.add_dependency 'paint', '~> 2.3'
 end

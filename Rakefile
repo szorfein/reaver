@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rake/testtask'
 require File.dirname(__FILE__) + '/lib/harpoon/version'
 
@@ -14,9 +16,8 @@ namespace :gem do
   task :build do
   Dir['harpoon*.gem'].each { |f| File.unlink(f) }
     system('gem build harpoon.gemspec')
-    system("gem install harpoon-#{Harpoon::VERSION}.gem -P HighSecurity")
+    system("gem install harpoon-#{Harpoon::VERSION}.gem")
   end
 end
 
 task default: :test
-
