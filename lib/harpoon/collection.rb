@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 require 'yaml'
+require 'time'
 
 module Harpoon
   class Collection
+    attr_reader :tasks
+
     def initialize(file)
       @file = file
     end
@@ -12,13 +15,12 @@ module Harpoon
       puts "loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
       puts @tasks.inspect
-      #@tasks.merge!(state_file) unless state_file == nil
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
 
     def launch
-      return if @tasks == nil
+      return unless @tasks
 
       if @tasks['things'].length >= 1
         puts "many things to do."
@@ -28,6 +30,24 @@ module Harpoon
       if @tasks['time'].is_a?(Integer)
         puts "good number #{@tasks['time']}"
       end
+    end
+
+    def save_yaml
+      return if @tasks == nil
+
+      update_time
+      File.open(@file, 'w') { |f| YAML.dump(@tasks, f) }
+    end
+
+    private
+
+    def update_time
+      return unless @tasks['things'].length >= 1
+
+      now = Time.new
+      n = @tasks['time'] if @tasks['time'].is_a?(Integer)
+      @tasks['next'] = now + n ||= 0
+      @tasks['last_download'] = now
     end
   end
 end
