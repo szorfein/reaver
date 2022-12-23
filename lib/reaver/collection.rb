@@ -22,7 +22,15 @@ module Reaver
     def launch
       return unless @tasks
 
+      name = @file.split('/').last
+      name = name.split('.').first
+      workdir = "#{CACHE_DIR}/#{name}"
+
+      FileUtils.mkdir_p(workdir)
+
       if @tasks['things'].length >= 1
+        puts "  > chdir #{workdir}"
+        Dir.chdir(workdir)
         @tasks['things'].each { |t| Reaver.download(t['url'], t['name']) }
       end
 
