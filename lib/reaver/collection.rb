@@ -16,7 +16,7 @@ module Reaver
     def load_yaml
       puts "loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-      # puts @tasks.inspect
+      puts @tasks.inspect
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
@@ -44,15 +44,6 @@ module Reaver
           compare_hash(t['name'], old_hash) if old_hash
         end
       end
-
-      update_time
-    end
-
-    def save_yaml
-      return unless @tasks
-
-      @tasks['changed'] = @changed
-      File.open(@file, 'w') { |f| YAML.dump(@tasks, f) }
     end
 
     private
@@ -60,15 +51,6 @@ module Reaver
     def compare_hash(filename, old_hash)
       hash = Digest::MD5.file filename
       @changed = true if old_hash.hexdigest != hash.hexdigest
-    end
-
-    def update_time
-      return unless @tasks['things'].length >= 1
-
-      now = Time.new
-      n = @tasks['time'] if @tasks['time'].is_a?(Integer)
-      @tasks['next'] = now + n ||= 0
-      @tasks['last_download'] = now
     end
   end
 end
