@@ -34,28 +34,27 @@ module Reaver
       name = f.split('/').last
       name = name.split('.').first
       workdir = "#{CACHE_DIR}/#{name}"
-      puts "  > REAVER.RB chdir #{workdir}"
 
       FileUtils.mkdir_p(workdir)
 
-      if File.exist? f
-        collection = Collection.new(f)
-        collection.load_yaml
+      collection = Collection.new(f)
+      collection.load_yaml
 
-        if collection.tasks
-          metadata = MetaData.new(workdir, collection)
-          metadata.load_yaml
-          next_download = metadata.info['next']
+      if collection.tasks
+        metadata = MetaData.new(workdir, collection)
+        metadata.load_yaml
+        next_download = metadata.info['next']
 
-          if next_download < Time.new
-            puts ' >> Download time for ' + name
-            collection.launch
-          else
-            puts "Next download for #{name} >> #{next_download}"
-          end
-
-          metadata.save_yaml
+        if next_download < Time.new
+          puts ' >> Download time for ' + name
+          Dir.chdir(workdir)
+          puts "  > chdir #{workdir}"
+          collection.launch(metadata)
+        else
+          puts "Next download for #{name} >> #{next_download}"
         end
+
+        metadata.save_yaml
       end
     end
   end

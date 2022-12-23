@@ -2,31 +2,27 @@
 
 module Reaver
   class MetaData
-    attr_reader :info
+    attr_accessor :info
 
     def initialize(dirname, collection)
       @dirname = dirname
       @collection = collection
       @file = "#{@dirname}/metadata.yml"
       @info = { 'changed' => false, 'next' => Time.new }
-      @changed = false
-      @next = Time.new
     end
 
     def load_yaml
       if File.exist? @file
         puts "loading metadata #{@file}..."
         @info = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-        puts @info.inspect
+        # puts @info.inspect
       else
         File.open(@file, 'w') { |f| YAML.dump(@info, f) }
-        puts @info.inspect
       end
     end
 
     def save_yaml
       update_time
-      @info['changed'] = @changed
 
       File.open(@file, 'w') { |f| YAML.dump(@info, f) }
     end

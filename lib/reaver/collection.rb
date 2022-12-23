@@ -16,23 +16,15 @@ module Reaver
     def load_yaml
       puts "loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-      puts @tasks.inspect
+      # puts @tasks.inspect
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
 
-    def launch
+    def launch(metadata)
       return unless @tasks
 
-      name = @file.split('/').last
-      name = name.split('.').first
-      workdir = "#{CACHE_DIR}/#{name}"
-
-      FileUtils.mkdir_p(workdir)
-
       if @tasks['things'].length >= 1
-        puts "  > chdir #{workdir}"
-        Dir.chdir(workdir)
         @tasks['things'].each do |t|
           if File.exists? t['name']
             old_hash = Digest::MD5.file t['name']
@@ -42,6 +34,8 @@ module Reaver
 
           Reaver.download(t['url'], t['name']) 
           compare_hash(t['name'], old_hash) if old_hash
+
+          metadata.info['changed'] = @changed
         end
       end
     end
