@@ -14,7 +14,7 @@ module Reaver
     end
 
     def load_yaml
-      puts "loading #{@file}..."
+      puts ">> Loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
       # puts @tasks.inspect
     rescue => error
@@ -26,7 +26,7 @@ module Reaver
 
       if @tasks['things'].length >= 1
         @tasks['things'].each do |t|
-          if File.exists? t['name']
+          if File.exist? t['name']
             old_hash = Digest::MD5.file t['name']
           else
             @changed = true

@@ -13,7 +13,7 @@ module Reaver
 
     def load_yaml
       if File.exist? @file
-        puts "loading metadata #{@file}..."
+        #puts "loading metadata #{@file}..."
         @info = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
         # puts @info.inspect
       else

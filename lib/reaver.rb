@@ -3,8 +3,8 @@
 require_relative 'reaver/version'
 require_relative 'reaver/banner'
 require_relative 'reaver/download'
-require_relative 'reaver/collection'
 require_relative 'reaver/metadata'
+require_relative 'reaver/collection'
 
 require 'whirly'
 require 'fileutils'
@@ -28,7 +28,7 @@ module Reaver
   def self.main
     FileUtils.mkdir_p(WORKDIR)
 
-    puts ">> Search collections in #{WORKDIR}"
+    #puts ">> Search collections in #{WORKDIR}"
 
     Dir.glob("#{WORKDIR}/*.yml").each do |f|
       name = f.split('/').last
@@ -46,12 +46,12 @@ module Reaver
         next_download = metadata.info['next']
 
         if next_download < Time.new
-          puts ' >> Download time for ' + name
-          Dir.chdir(workdir)
-          puts "  > chdir #{workdir}"
+          #puts ' >> Download time for ' + name
+          FileUtils.chdir(workdir)
+          #puts "  > chdir #{workdir}"
           collection.launch(metadata)
         else
-          puts "Next download for #{name} >> #{next_download}"
+          puts " > Next download > #{next_download}"
         end
 
         metadata.save_yaml
