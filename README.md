@@ -1,7 +1,7 @@
 # reaver
 
-A tools to downloads things on the net. Reaver is used to get all files
-required by your project, track the last version, etc.
+A tool that allows to download and track the latest version of stuff on the net.
+Define your collections in .yml and launch Reaver to retrieve everything.
 
 ## Collections
 
@@ -38,3 +38,5 @@ The `name` must contain the path extension for now.
 And start reaver simply with:
 
     $ reaver
+
+Reaver download all files in `~/.cache/reaver` by default.

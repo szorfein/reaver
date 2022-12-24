@@ -5,12 +5,13 @@ require_relative 'lib/reaver/version'
 # https://guides.rubygems.org/specification-reference/
 Gem::Specification.new do |s|
   s.name = 'reaver'
-  s.summary = 'A tool to downloads and search for updates of things on the Net.'
+  s.summary = 'A tool to downloads and track updates of things on the Net.'
   s.version = Reaver::VERSION
   s.platform = Gem::Platform::RUBY
 
   s.description = <<-DESCRIPTION
-    A tool to download and search for updates of things on the Net. Define collections in yaml with a delay in seconds and launch Reaver.
+    A tool that allows to download and track the latest version of stuff on the net.
+    Define your collections in .yml and launch Reaver to retrieve everything.
   DESCRIPTION
 
   s.email = 'szorfein@protonmail.com'

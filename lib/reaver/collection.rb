@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'time'
+require 'digest'
 
 module Reaver
   class Collection
@@ -9,41 +10,41 @@ module Reaver
 
     def initialize(file)
       @file = file
+      @changed = false
     end
 
     def load_yaml
-      puts "loading #{@file}..."
+      puts ">> Loading #{@file}..."
       @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
       # puts @tasks.inspect
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
 
-    def launch
+    def launch(metadata)
       return unless @tasks
 
       if @tasks['things'].length >= 1
-        @tasks['things'].each { |t| Reaver.download(t['url'], t['name']) }
+        @tasks['things'].each do |t|
+          if File.exist? t['name']
+            old_hash = Digest::MD5.file t['name']
+          else
+            @changed = true
+          end
+
+          Reaver.download(t['url'], t['name']) 
+          compare_hash(t['name'], old_hash) if old_hash
+
+          metadata.info['changed'] = @changed
+        end
       end
-
-      update_time
-    end
-
-    def save_yaml
-      return if @tasks == nil
-
-      File.open(@file, 'w') { |f| YAML.dump(@tasks, f) }
     end
 
     private
 
-    def update_time
-      return unless @tasks['things'].length >= 1
-
-      now = Time.new
-      n = @tasks['time'] if @tasks['time'].is_a?(Integer)
-      @tasks['next'] = now + n ||= 0
-      @tasks['last_download'] = now
+    def compare_hash(filename, old_hash)
+      hash = Digest::MD5.file filename
+      @changed = true if old_hash.hexdigest != hash.hexdigest
     end
   end
 end
