@@ -39,4 +39,4 @@ And start reaver simply with:
 
     $ reaver
 
-Reaver download all files in `~/.cache/reaver`.
+Reaver download all files in `~/.cache/reaver` by default.
