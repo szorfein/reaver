@@ -15,8 +15,11 @@ module Reaver
 
     def load_yaml
       puts ">> Loading #{@file}..."
-      @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-      # puts @tasks.inspect
+      if RUBY_VERSION >= '3.0'
+        @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
+      else
+        @tasks = YAML.load_file(@file)
+      end
     rescue => error
       raise error, "loading YAML fail for #{@file}: #{error.message}"
     end
