@@ -14,7 +14,11 @@ module Reaver
     def load_yaml
       if File.exist? @file
         #puts "loading metadata #{@file}..."
-        @info = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
+        if RUBY_VERSION >= '3.0'
+          @info = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
+        else
+          @info = YAML.load_file(@file)
+        end
         # puts @info.inspect
       else
         File.open(@file, 'w') { |f| YAML.dump(@info, f) }
