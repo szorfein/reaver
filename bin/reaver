@@ -7,4 +7,4 @@ puts Reaver.banner
 
 Reaver.main
 
-puts "\nReaver v" + Reaver::VERSION
+puts "\nReaver v#{Reaver::VERSION}"

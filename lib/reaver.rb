@@ -22,8 +22,8 @@ module Reaver
 
   # Configure Whirly
   Whirly.configure spinner: 'bouncingBar',
-    color: true,
-    ambiguous_characters_width: 1
+                   color: true,
+                   ambiguous_characters_width: 1
 
   def self.main
     FileUtils.mkdir_p(WORKDIR)
@@ -40,22 +40,27 @@ module Reaver
       collection = Collection.new(f)
       collection.load_yaml
 
-      if collection.tasks
-        metadata = MetaData.new(workdir, collection)
-        metadata.load_yaml
-        next_download = metadata.info['next']
+      #puts collection.tasks
 
-        if next_download < Time.new
+      next unless collection.tasks
+
+      metadata = MetaData.new(workdir, collection)
+      metadata.load_yaml
+      next_download = metadata.info['next']
+      force_download = collection.tasks['force_download'] || false
+      #puts "should we force #{force_download}"
+
+      if next_download < Time.new || force_download
           #puts ' >> Download time for ' + name
-          FileUtils.chdir(workdir)
-          #puts "  > chdir #{workdir}"
-          collection.launch(metadata)
-        else
-          puts " > Next download > #{next_download}"
-        end
-
-        metadata.save_yaml
+        FileUtils.chdir(workdir)
+        #puts "  > chdir #{workdir}"
+        collection.launch(metadata)
+        collection.save_yaml if force_download
+      else
+        puts " > Next download > #{next_download}"
       end
+
+      metadata.save_yaml
     end
   end
 end
