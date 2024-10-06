@@ -1,7 +1,12 @@
 # reaver
 
 A tool that allows to download and track the latest version of stuff on the net.
-Define your collections in .yml and launch Reaver to retrieve everything.
+Define your collections in .yml and launch Reaver to retrieve everything and
+move things to the right spot.
+
+## Dependencies
+
+Reaver need only `unzip` and `tar`.
 
 ## Collections
 
@@ -30,10 +35,24 @@ things:
   - name: nerdtree.tar.gz
     url: https://github.com/preservim/nerdtree/archive/refs/heads/master.tar.gz
 time: 86000
+all_into_dir: ~/.config/pack/myvimpluggins/start
+keep_name: true
 ```
 
-`time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).  
-The `name` must contain the path extension for now.
+To see more examples, go
+[here](https://github.com/szorfein/dots/tree/ansible/home/private_dot_config/reaver)
+
+A collection can include:
+- `all_into_dir: <dirname>` if all files go in a directory. Directory is created
+  if not exist.
+- `keep_name: <boolean>`, if `true`, use the name of the thing for the dest, e.g, for a name `ombre.tar.gz`, the final dest will be `all_into_dir/ombre` or `dest_dir/ombre`.
+- `force_download: <boolean>`, if you make change and want to download now, change to `true`.
+- `things.dest_dir: <dirname>`, if each files go in differents directory, use this.
+- `things.name` the new name after download, may include the file extension.
+- `things.url: <string>`
+- `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).
+
+If `all_into_dir` is defined, `things.dest_dir` is not used.
 
 And start reaver simply with:
 

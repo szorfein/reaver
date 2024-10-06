@@ -1,3 +1,10 @@
+## 0.10.0, release 10/2024
+- New variable for collections, all_into_dir, things.dest_dir, keep_name and
+  force_download.
+-** Use [Marcel](https://github.com/rails/marcel) to detect file mime.
+- Can decompress archive `zip` or `tar.gz (gzip)` using unzip and tar from `unix`.
+- Cam move files to specific directory.
+
 ## 0.7.0, release 12/24/22
 
 * Each collections download things in separate directory.
