@@ -33,14 +33,21 @@ module Reaver
     def launch(metadata)
       return unless @tasks || @tasks['things'].length.zero?
 
-      @tasks['things'].each do |t|
-        hash_exist(t['name'])
-        Reaver.download(t['url'], t['name'])
-        compare_to_old_hash(t['name']) if @old_hash
-        need_to_do_something_with(t) if @changed || !@old_hash
+      @tasks['things'].each do |task|
+        do_thing(task)
         metadata.info['changed'] = @changed
-        @tasks['force_download'] = false
       end
+    end
+
+    protected
+
+    def do_thing(task)
+      hash_exist(task['name'])
+      Reaver.download(task['url'], task['name'])
+      compare_to_old_hash(task['name']) if @old_hash
+      need_to_do_something_with(task) if @changed || !@old_hash
+      @tasks['force_download'] = false
+      @changed = false
     end
 
     private
