@@ -5,6 +5,7 @@ require_relative 'reaver/banner'
 require_relative 'reaver/download'
 require_relative 'reaver/metadata'
 require_relative 'reaver/collection'
+require_relative 'reaver/walk'
 
 require 'whirly'
 require 'fileutils'
@@ -22,8 +23,8 @@ module Reaver
 
   # Configure Whirly
   Whirly.configure spinner: 'bouncingBar',
-    color: true,
-    ambiguous_characters_width: 1
+                   color: true,
+                   ambiguous_characters_width: 1
 
   def self.main
     FileUtils.mkdir_p(WORKDIR)

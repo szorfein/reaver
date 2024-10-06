@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => 'https://github.com/szorfein/reaver/blob/main/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/szorfein/reaver',
     'wiki_uri' => 'https://github.com/szorfein/reaver/wiki',
-    'funding_uri' => 'https://patreon.com/szorfein',
+    'funding_uri' => 'https://patreon.com/szorfein'
   }
 
   s.files = Dir.glob('{lib,bin}/**/*', File::FNM_DOTMATCH).reject do |f|
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
   s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
   s.required_ruby_version = '>=2.6'
-  s.add_dependency 'whirly', '~> 0.3'
+  s.add_dependency 'marcel'
   s.add_dependency 'paint', '~> 2.3'
+  s.add_dependency 'whirly', '~> 0.3'
 end
