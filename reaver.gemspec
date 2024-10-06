@@ -38,8 +38,8 @@ Gem::Specification.new do |s|
   s.executables << 'reaver'
   s.extra_rdoc_files = %w[README.md]
 
-  s.cert_chain = %w[certs/szorfein.pem]
-  s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
+  # s.cert_chain = %w[certs/szorfein.pem]
+  # s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
   s.required_ruby_version = '>=2.6'
   s.add_dependency 'marcel'
