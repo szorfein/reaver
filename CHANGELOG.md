@@ -1,3 +1,7 @@
+- New variable for collections, all_into_dir, things.dest_dir, keep_name.
+-** Use [Marcel](https://github.com/rails/marcel) to detect file mime.
+- Can decompress archive `zip` or `tar.gz (gzip)` using unzip and tar from `unix`.
+
 ## 0.7.0, release 12/24/22
 
 * Each collections download things in separate directory.

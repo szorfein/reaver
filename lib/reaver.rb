@@ -5,6 +5,7 @@ require_relative 'reaver/banner'
 require_relative 'reaver/download'
 require_relative 'reaver/metadata'
 require_relative 'reaver/collection'
+require_relative 'reaver/walk'
 
 require 'whirly'
 require 'fileutils'
