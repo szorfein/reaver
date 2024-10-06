@@ -30,10 +30,12 @@ things:
   - name: nerdtree.tar.gz
     url: https://github.com/preservim/nerdtree/archive/refs/heads/master.tar.gz
 time: 86000
+force_download: false
 ```
 
 `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).  
 The `name` must contain the path extension for now.
+`force_download`: if you make change and want to download now, change to `true`.
 
 And start reaver simply with:
 

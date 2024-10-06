@@ -15,31 +15,35 @@ module Reaver
 
     def load_yaml
       puts ">> Loading #{@file}..."
-      if RUBY_VERSION >= '3.0'
-        @tasks = YAML.load_file(@file,  permitted_classes: [Time, Symbol])
-      else
-        @tasks = YAML.load_file(@file)
-      end
-    rescue => error
-      raise error, "loading YAML fail for #{@file}: #{error.message}"
+      @tasks = if RUBY_VERSION >= '3.0'
+                 YAML.load_file(@file, permitted_classes: [Time, Symbol])
+               else
+                 @tasks = YAML.load_file(@file)
+               end
+    rescue => e
+      raise e, "loading YAML fail for #{@file}: #{e.message}"
+    end
+
+    def save_yaml
+      in_yaml = YAML.dump(@tasks)
+      File.write(@file, in_yaml)
     end
 
     def launch(metadata)
-      return unless @tasks
+      return unless @tasks || @tasks['things'].length.zero?
 
-      if @tasks['things'].length >= 1
-        @tasks['things'].each do |t|
-          if File.exist? t['name']
-            old_hash = Digest::MD5.file t['name']
-          else
-            @changed = true
-          end
-
-          Reaver.download(t['url'], t['name']) 
-          compare_hash(t['name'], old_hash) if old_hash
-
-          metadata.info['changed'] = @changed
+      @tasks['things'].each do |t|
+        if File.exist? t['name']
+          old_hash = Digest::MD5.file t['name']
+        else
+          @changed = true
         end
+
+        Reaver.download(t['url'], t['name'])
+        compare_hash(t['name'], old_hash) if old_hash
+
+        metadata.info['changed'] = @changed
+        @tasks['force_download'] = false
       end
     end
 
