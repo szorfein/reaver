@@ -6,7 +6,7 @@ move things to the right spot.
 
 ## Dependencies
 
-Reaver need only `unzip` and `tar`.
+Reaver need only `unzip`, `xz` and `tar`.
 
 ## Collections
 

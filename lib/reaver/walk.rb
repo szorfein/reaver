@@ -63,7 +63,7 @@ module Reaver
       ext = @extension.split('/').last
       puts "Extracting #{ext} archive #{@filename} at #{@final_dest}..."
       FileUtils.mkdir_p @final_dest
-      `tar x -f #{@filename} --one-top-level=#{@final_dest}`
+      `tar x --strip-components=1 -f #{@filename} --one-top-level=#{@final_dest}`
     end
   end
 end
