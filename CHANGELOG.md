@@ -1,3 +1,8 @@
+## 0.10.1
+- For `all_to_dir_path` or `things.dest_dir`, all paths are relative to `$HOME` (or
+  /home/<name>), so don't include shell variable `~` or `$HOME`.
+- unzip not interactive with `-o`.
+
 ## 0.10.0, release 10/2024
 - New variable for collections, all_into_dir, things.dest_dir, keep_name and
   force_download.
