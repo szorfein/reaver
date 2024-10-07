@@ -17,11 +17,11 @@ module Reaver
 
     def x
       case @extension
-      when %r{^image/jpeg} || %r{^image/png}
+      when %r{^image/(jpeg|png)}
         copy_file
       when %r{^application/zip}
         extract_zip
-      when %r{^application/gzip}
+      when %r{^application/(gzip|x-xz)}
         extract_gzip
       when %r{^font/ttf}
         copy_file
@@ -60,9 +60,10 @@ module Reaver
     end
 
     def extract_gzip
-      puts "Extracting gzip archive #{@filename} at #{@final_dest}..."
+      ext = @extension.split('/').last
+      puts "Extracting #{ext} archive #{@filename} at #{@final_dest}..."
       FileUtils.mkdir_p @final_dest
-      `tar -x --strip-components=1 -f #{@filename} --one-top-level=#{@final_dest}`
+      `tar x -f #{@filename} --one-top-level=#{@final_dest}`
     end
   end
 end

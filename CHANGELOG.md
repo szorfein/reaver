@@ -1,3 +1,6 @@
+## 0.11.0, release 10/2024
+- can extract tar.xz archive.
+
 ## 0.10.1
 - For `all_to_dir_path` or `things.dest_dir`, all paths are relative to `$HOME` (or
   /home/<name>), so don't include shell variable `~` or `$HOME`.
