@@ -40,7 +40,11 @@ module Reaver
 
     def check_name
       name = @filename.split('.').first
-      @final_dest = @keep_name ? "#{@dest}/#{name}" : @dest
+      @final_dest = if @keep_name
+                      "#{ENV['HOME']}/#{@dest}/#{name}"
+                    else
+                      "#{ENV['HOME']}/#{@dest}"
+                    end
     end
 
     def copy_file
@@ -52,7 +56,7 @@ module Reaver
     def extract_zip
       puts "Extracting zip archive #{@filename} at #{@final_dest}..."
       FileUtils.mkdir_p @final_dest
-      `unzip -j #{@filename} -d #{@final_dest}`
+      `unzip -o -j #{@filename} -d #{@final_dest}`
     end
 
     def extract_gzip

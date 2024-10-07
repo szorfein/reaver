@@ -35,7 +35,7 @@ things:
   - name: nerdtree.tar.gz
     url: https://github.com/preservim/nerdtree/archive/refs/heads/master.tar.gz
 time: 86000
-all_into_dir: ~/.config/pack/myvimpluggins/start
+all_into_dir: .config/pack/myvimpluggins/start
 keep_name: true
 ```
 
@@ -52,7 +52,9 @@ A collection can include:
 - `things.url: <string>`
 - `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).
 
-If `all_into_dir` is defined, `things.dest_dir` is not used.
+If `all_into_dir` is defined, `things.dest_dir` is not used.  
+All paths given are relative to `$HOME` so don't include `~` or any shell
+variables.
 
 And start reaver simply with:
 
