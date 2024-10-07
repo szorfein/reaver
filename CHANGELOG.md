@@ -1,3 +1,5 @@
+- add `--strip-components=1` to tar
+
 ## 0.11.0, release 10/2024
 - can extract tar.xz archive.
 
