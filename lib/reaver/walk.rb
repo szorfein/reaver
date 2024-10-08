@@ -6,10 +6,11 @@ require 'fileutils'
 module Reaver
   # extract, move file if need
   class Walk
-    def initialize(filename, dest, keep_name)
+    def initialize(filename, dest, keep_name, strip)
       @filename = filename
       @dest = dest
       @keep_name = keep_name || false
+      @strip = strip
       check_extension
       check_name
       x
@@ -63,7 +64,7 @@ module Reaver
       ext = @extension.split('/').last
       puts "Extracting #{ext} archive #{@filename} at #{@final_dest}..."
       FileUtils.mkdir_p @final_dest
-      `tar x --strip-components=1 -f #{@filename} --one-top-level=#{@final_dest}`
+      `tar x --strip-components=#{@strip} -f #{@filename} --one-top-level=#{@final_dest}`
     end
   end
 end
