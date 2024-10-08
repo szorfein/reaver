@@ -1,10 +1,12 @@
-- add `--strip-components=1` to tar
+## 0.12.0
+- Add `--strip-components=1` to tar, by default set to `1` may be changed by
+  `things[].strip_components: <number>` variable
 
 ## 0.11.0, release 10/2024
 - can extract tar.xz archive.
 
 ## 0.10.1
-- For `all_to_dir_path` or `things.dest_dir`, all paths are relative to `$HOME` (or
+- For `all_to_dir_path` or `things[].dest_dir`, all paths are relative to `$HOME` (or
   /home/<name>), so don't include shell variable `~` or `$HOME`.
 - unzip not interactive with `-o`.
 

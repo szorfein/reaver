@@ -68,7 +68,13 @@ module Reaver
     def need_to_do_something_with(file)
       dest = @tasks['all_to_dest_dir'] || file['dest_dir']
       keep_name = @tasks['keep_name'] || false
-      Reaver::Walk.new(file['name'], dest, keep_name) if dest
+      strip_components = file['strip_components'] || '1'
+      return unless dest
+
+      Reaver::Walk.new(file['name'],
+                       dest,
+                       keep_name,
+                       strip_components)
     end
   end
 end

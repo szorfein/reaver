@@ -1,5 +1,8 @@
 # reaver
 
+[![Gem
+Version](https://badge.fury.io/rb/reaver.svg)](https://badge.fury.io/rb/reaver)
+
 A tool that allows to download and track the latest version of stuff on the net.
 Define your collections in .yml and launch Reaver to retrieve everything and
 move things to the right spot.
@@ -47,12 +50,14 @@ A collection can include:
   if not exist.
 - `keep_name: <boolean>`, if `true`, use the name of the thing for the dest, e.g, for a name `ombre.tar.gz`, the final dest will be `all_into_dir/ombre` or `dest_dir/ombre`.
 - `force_download: <boolean>`, if you make change and want to download now, change to `true`.
-- `things.dest_dir: <dirname>`, if each files go in differents directory, use this.
-- `things.name` the new name after download, may include the file extension.
-- `things.url: <string>`
+- `things[].dest_dir: <dirname>`, if each files go in differents directory, use this.
+- `things[].name` the new name after download, may include the file extension.
+- `things[].strip_components: <number>`, used on `tar`, default to 1, skip the first
+  directory from an archive, if no subdirectory exist, you should set to 0.
+- `things[].url: <string>`
 - `time: 86000` (in second) is for search every day ( 60 * 60 * 24 ).
 
-If `all_into_dir` is defined, `things.dest_dir` is not used.  
+If `all_into_dir` is defined, `things[].dest_dir` is not used.  
 All paths given are relative to `$HOME` so don't include `~` or any shell
 variables.
 
