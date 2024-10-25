@@ -26,6 +26,8 @@ module Reaver
         extract_gzip
       when %r{^font/ttf}
         copy_file
+      when %r{^application/(x-elf|x-sh)}
+        copy_file_with_x
       else
         puts "Filetype #{@extension} not yet supported, skipping..."
       end
@@ -52,6 +54,13 @@ module Reaver
       puts "Copying file #{@filename} at #{@final_dest}..."
       FileUtils.mkdir_p @final_dest
       FileUtils.cp @filename, "#{@final_dest}/#{@filename}"
+    rescue Errno::ETXTBSY => e
+      puts "You should stop program before update > #{e}"
+    end
+
+    def copy_file_with_x
+      copy_file
+      File.chmod 0700, "#{@final_dest}/#{@filename}"
     end
 
     def extract_zip
