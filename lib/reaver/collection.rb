@@ -34,7 +34,11 @@ module Reaver
       return unless @tasks || @tasks['things'].length.zero?
 
       @tasks['things'].each do |task|
-        do_thing(task)
+        if task['git']
+          Reaver::Git.new(task['url'], task['dest_dir'])
+        else
+          do_thing(task)
+        end
         metadata.info['changed'] = @changed
       end
     end

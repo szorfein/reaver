@@ -1,3 +1,6 @@
+## 0.14.0, release 11/2024
+- Can `git clone` && `git pull` if use `things[].git: true`
+
 ## 0.12.0
 - Add `--strip-components=1` to tar, by default set to `1` may be changed by
   `things[].strip_components: <number>` variable

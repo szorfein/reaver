@@ -6,6 +6,7 @@ require_relative 'reaver/download'
 require_relative 'reaver/metadata'
 require_relative 'reaver/collection'
 require_relative 'reaver/walk'
+require_relative 'reaver/git'
 
 require 'whirly'
 require 'fileutils'
