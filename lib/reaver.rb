@@ -57,7 +57,7 @@ module Reaver
         FileUtils.chdir(workdir)
         #puts "  > chdir #{workdir}"
         collection.launch(metadata)
-        collection.save_yaml if force_download
+        #collection.save_yaml if force_download
       else
         puts " > Next download > #{next_download}"
       end
