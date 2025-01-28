@@ -14,7 +14,7 @@ module Reaver
     raise Error, "url was invalid" if !url.respond_to?(:open)
 
     options = {}
-    options['User-Agent'] = 'MyApp/1.2.3'
+    options['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6556.192 Safari/537.36'
 
     downloaded_file = ''
     Whirly.start do

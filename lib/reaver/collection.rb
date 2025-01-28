@@ -71,7 +71,7 @@ module Reaver
 
     def need_to_do_something_with(file)
       dest = @tasks['all_to_dest_dir'] || file['dest_dir']
-      keep_name = @tasks['keep_name'] || false
+      keep_name = @tasks['keep_name'] || file['keep_name'] || false
       strip_components = file['strip_components'] || '1'
       return unless dest
 

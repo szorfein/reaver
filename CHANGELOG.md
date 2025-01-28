@@ -1,3 +1,8 @@
+## 0.16.0, release 01/2025
++ Reaver stop rewriting our yaml collections and erase indentation...
++ Change the user-agent used for a more generic `Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6556.192 Safari/537.36`
++ Can add `keep_name = true` per file, not only globally.
+
 ## 0.14.0, release 11/2024
 - Can `git clone` && `git pull` if use `things[].git: true`
 
