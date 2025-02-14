@@ -41,7 +41,8 @@ Gem::Specification.new do |s|
   # s.cert_chain = %w[certs/szorfein.pem]
   # s.signing_key = File.expand_path('~/.ssh/gem-private_key.pem')
 
-  s.required_ruby_version = '>=3.0'
+  # git action need >=2.6
+  s.required_ruby_version = '>=2.6'
   s.add_dependency 'marcel', '~> 1.0'
   s.add_dependency 'paint', '~> 2.3'
   s.add_dependency 'whirly', '~> 0.3'

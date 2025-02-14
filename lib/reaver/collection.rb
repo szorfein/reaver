@@ -31,7 +31,7 @@ module Reaver
     end
 
     def launch(metadata)
-      return unless @tasks || @tasks['things'].length.zero?
+      return if !@tasks['things'] || @tasks['things'].nil?
 
       @tasks['things'].each do |task|
         if task['git']

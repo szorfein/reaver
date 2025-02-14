@@ -1,3 +1,6 @@
+### Fixes
++ Skip in not things or things[] is nil
+
 ## 0.16.0, release 01/2025
 + Reaver stop rewriting our yaml collections and erase indentation...
 + Change the user-agent used for a more generic `Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.6556.192 Safari/537.36`
