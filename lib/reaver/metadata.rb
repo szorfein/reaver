@@ -34,7 +34,7 @@ module Reaver
     private
 
     def update_time
-      return unless @collection.tasks['things'].length >= 1
+      return if !@collection.tasks['things'] || @collection.tasks['things'].nil?
 
       now = Time.new
       n = @collection.tasks['time'] if @collection.tasks['time'].is_a?(Integer)
