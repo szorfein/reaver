@@ -11,58 +11,70 @@ require_relative 'reaver/git'
 require 'whirly'
 require 'fileutils'
 
+# Main class
 module Reaver
+  module_function
+
   # Where downloads things
   CACHE_DIR = "#{ENV['HOME']}/.cache/reaver"
 
   # Search collection paths
-  if ENV['XDG_CONFIG_HOME']
-    WORKDIR = "#{ENV['XDG_CONFIG_HOME']}/reaver"
-  else
-    WORKDIR = "#{ENV['HOME']}/.config/reaver"
-  end
+  WORKDIR = ENV['XDG_CONFIG_HOME'] ? "#{ENV['XDG_CONFIG_HOME']}/reaver" : "#{ENV['HOME']}/.config/reaver"
 
   # Configure Whirly
   Whirly.configure spinner: 'bouncingBar',
                    color: true,
                    ambiguous_characters_width: 1
 
-  def self.main
-    FileUtils.mkdir_p(WORKDIR)
+  FileUtils.mkdir_p(WORKDIR)
 
-    #puts ">> Search collections in #{WORKDIR}"
-
+  def main
     Dir.glob("#{WORKDIR}/*.yml").each do |f|
-      name = f.split('/').last
-      name = name.split('.').first
-      workdir = "#{CACHE_DIR}/#{name}"
-
-      FileUtils.mkdir_p(workdir)
-
-      collection = Collection.new(f)
-      collection.load_yaml
-
-      #puts collection.tasks
+      workdir = collection_name(f)
+      collection = load_collection(f)
 
       next unless collection.tasks
 
-      metadata = MetaData.new(workdir, collection)
-      metadata.load_yaml
-      next_download = metadata.info['next']
-      force_download = collection.tasks['force_download'] || false
-      #puts "should we force #{force_download}"
-
-      if next_download < Time.new || force_download
-          #puts ' >> Download time for ' + name
-        FileUtils.chdir(workdir)
-        #puts "  > chdir #{workdir}"
-        collection.launch(metadata)
-        #collection.save_yaml if force_download
-      else
-        puts " > Next download > #{next_download}"
+      metadata = load_metadata(workdir, collection)
+      if analyze_collection(metadata.info['next'], collection.tasks['force_download'])
+        time_to_download(workdir, collection, metadata)
       end
 
       metadata.save_yaml
     end
+  end
+
+  def load_collection(pathname)
+    collection = Collection.new(pathname)
+    collection.load_yaml
+    collection
+  end
+
+  def load_metadata(workdir, collection)
+    FileUtils.mkdir_p(workdir)
+    md = MetaData.new(workdir, collection)
+    md.load_yaml
+    md
+  end
+
+  def collection_name(filename)
+    name = filename.split('/').last
+    name = name.split('.').first
+    "#{CACHE_DIR}/#{name}"
+  end
+
+  def analyze_collection(info_next, forced = nil)
+    next_download = info_next
+    force_download = forced || false
+    return true if next_download < Time.new || force_download
+
+    puts " > Next download > #{next_download}"
+    false
+  end
+
+  def time_to_download(workdir, collection, metadata)
+    FileUtils.chdir(workdir)
+    collection.launch(metadata)
+    # collection.save_yaml if force_download
   end
 end
