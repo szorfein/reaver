@@ -18,16 +18,11 @@ module Reaver
 
     def x
       case @extension
-      when %r{^image/(jpeg|png)}
-        copy_file
-      when %r{^application/zip}
-        extract_zip
-      when %r{^application/(gzip|x-xz)}
-        extract_gzip
-      when %r{^font/ttf}
-        copy_file
-      when %r{^application/(x-elf|x-sh)}
-        copy_file_with_x
+      when %r{^image/(jpeg|png)} then copy_file
+      when %r{^application/zip} then extract_zip
+      when %r{^application/(gzip|x-xz)} then extract_gzip
+      when %r{^font/ttf} then copy_file
+      when %r{^application/(x-elf|x-sh)} then copy_file_with_x
       else
         puts "Filetype #{@extension} not yet supported, skipping..."
       end
@@ -60,7 +55,7 @@ module Reaver
 
     def copy_file_with_x
       copy_file
-      File.chmod 0700, "#{@final_dest}/#{@filename}"
+      File.chmod 0o700, "#{@final_dest}/#{@filename}"
     end
 
     def extract_zip
