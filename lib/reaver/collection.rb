@@ -21,7 +21,7 @@ module Reaver
                else
                  @tasks = YAML.load_file(@file)
                end
-    rescue => e
+    rescue StandardError => e
       raise e, "loading YAML fail for #{@file}: #{e.message}"
     end
 

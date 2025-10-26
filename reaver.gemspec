@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
 
   # git action need >=2.6
   s.required_ruby_version = '>=2.6'
-  s.add_dependency 'marcel', '~> 1.0'
+  s.add_dependency 'marcel', '~> 1.1'
   s.add_dependency 'paint', '~> 2.3'
   s.add_dependency 'whirly', '~> 0.3'
 end
