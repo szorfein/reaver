@@ -17,10 +17,10 @@ module Reaver
     def load_yaml
       puts ">> Loading #{@file}..."
       @tasks = if RUBY_VERSION >= '3.0'
-                 YAML.load_file(@file, permitted_classes: [Time, Symbol])
-               else
-                 @tasks = YAML.load_file(@file)
-               end
+          YAML.load_file(@file, permitted_classes: [Time, Symbol])
+        else
+          @tasks = YAML.load_file(@file)
+        end
     rescue StandardError => e
       raise e, "loading YAML fail for #{@file}: #{e.message}"
     end
@@ -33,17 +33,23 @@ module Reaver
     def launch(metadata)
       return if !@tasks['things'] || @tasks['things'].nil?
 
+      threads = []
       @tasks['things'].each do |task|
-        if task['git']
-          Reaver::Git.new(task['url'], task['dest_dir'])
-        else
-          do_thing(task)
-        end
-        metadata.info['changed'] = @changed
+        threads << Thread.new { git_or_not(task, metadata) }
       end
+      threads.each(&:join)
     end
 
     protected
+
+    def git_or_not(task, metadata)
+      if task['git']
+        Reaver::Git.new(task['url'], task['dest_dir'])
+      else
+        do_thing(task)
+      end
+      metadata.info['changed'] = @changed
+    end
 
     def do_thing(task)
       hash_exist(task['name'])

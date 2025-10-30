@@ -17,7 +17,7 @@ module Reaver
     options = {}
 
     Whirly.start do
-      Whirly.status = "downloading #{dest}"
+      Whirly.status = "Downloading #{dest}"
       options['User-Agent'] = agent_list
       downloaded_file = URI.open(url, options)
 
@@ -43,7 +43,7 @@ module Reaver
     if file.is_a?(StringIO)
       tempfile = Tempfile.new('open-uri', binmode: true)
       IO.copy_stream(file, tempfile.path)
-      FileUtils.mv file.path, dest
+      FileUtils.mv tempfile.path, dest
     else
       IO.copy_stream(file, dest)
     end
