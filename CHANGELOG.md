@@ -1,11 +1,13 @@
-## 0.17.0 - Oct. 2025
+## 0.18.0 - Oct. 2025
 
+- Adding threads on tasks
 - Random user-agent on each download
 - Code improvement with Rubocop
 
 ### Fixes
 
 - Skip in not things or things[] is nil
+- Error on download with file.path
 
 ## 0.16.0, release 01/2025
 
