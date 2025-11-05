@@ -1,3 +1,7 @@
+## 0.18.1
+
+- Remove threading, need more test.
+
 ## 0.18.0 - Oct. 2025
 
 - Adding threads on tasks
