@@ -33,27 +33,25 @@ module Reaver
     def launch(metadata)
       return if !@tasks['things'] || @tasks['things'].nil?
 
-      threads = []
-      @tasks['things'].each do |task|
-        threads << Thread.new { git_or_not(task, metadata) }
-      end
-      threads.each(&:join)
+      get_each_files(@tasks)
+      @tasks['things'].each { |task| move_thing(task) unless task['git'] }
+      metadata.info['changed'] = @changed
     end
 
     protected
 
-    def git_or_not(task, metadata)
-      if task['git']
-        Reaver::Git.new(task['url'], task['dest_dir'])
-      else
-        do_thing(task)
+    def get_each_files(tasks)
+      tasks['things'].each do |task|
+        if task['git']
+          Reaver::Git.new(task['url'], task['dest_dir'])
+        else
+          hash_exist(task['name'])
+          Reaver.download(task['url'], task['name'])
+        end
       end
-      metadata.info['changed'] = @changed
     end
 
-    def do_thing(task)
-      hash_exist(task['name'])
-      Reaver.download(task['url'], task['name'])
+    def move_thing(task)
       compare_to_old_hash(task['name']) if @old_hash
       need_to_do_something_with(task) if @changed || !@old_hash
       @tasks['force_download'] = false
