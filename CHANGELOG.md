@@ -1,5 +1,6 @@
-## 0.18.1
+## 0.19.1
 
+- Download with net/http(s) instead of open-uri
 - Remove threading, need more test.
 
 ## 0.18.0 - Oct. 2025

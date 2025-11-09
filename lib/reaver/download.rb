@@ -3,8 +3,6 @@
 require 'open-uri'
 require 'net/http'
 require 'net/https'
-# require 'tempfile'
-# require 'fileutils'
 
 # Download link
 module Reaver
@@ -67,18 +65,4 @@ module Reaver
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Trailer/93.3.8652.5']
     ag.sample
   end
-
-  # def get_the_link(file, dest)
-  # open-uri will return a StringIO instead of a Tempfile if the filesize
-  # is less than 10 KB, so we patch this behaviour by converting it into
-  # a Tempfile.
-  # if file.is_a?(StringIO)
-  #   tempfile = Tempfile.new('open-uri', binmode: true)
-  #   IO.copy_stream(file, tempfile.path)
-  #   FileUtils.mv tempfile.path, dest
-  # else
-  #   IO.copy_stream(file, dest)
-  # end
-  # file
-  # end
 end
