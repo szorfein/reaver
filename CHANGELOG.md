@@ -1,6 +1,15 @@
-## 0.19.1
+## 0.20.1
+
+#### New support files
+
+- Can threat with svg+xml files.
+
+#### Other change
 
 - Download with net/http(s) instead of open-uri
+
+#### Fixes
+
 - Remove threading, need more test.
 
 ## 0.18.0 - Oct. 2025

@@ -18,7 +18,7 @@ module Reaver
 
     def x
       case @extension
-      when %r{^image/(jpeg|png)} then copy_file
+      when %r{^image/(jpeg|png|svg\+xml)} then copy_file
       when %r{^application/zip} then extract_zip
       when %r{^application/(gzip|x-xz)} then extract_gzip
       when %r{^font/ttf} then copy_file
@@ -39,10 +39,10 @@ module Reaver
     def check_name
       name = @filename.split('.').first
       @final_dest = if @keep_name
-                      "#{ENV['HOME']}/#{@dest}/#{name}"
-                    else
-                      "#{ENV['HOME']}/#{@dest}"
-                    end
+          "#{ENV['HOME']}/#{@dest}/#{name}"
+        else
+          "#{ENV['HOME']}/#{@dest}"
+        end
     end
 
     def copy_file
@@ -55,7 +55,7 @@ module Reaver
 
     def copy_file_with_x
       copy_file
-      File.chmod 0o700, "#{@final_dest}/#{@filename}"
+      File.chmod('0700', "#{@final_dest}/#{@filename}")
     end
 
     def extract_zip
